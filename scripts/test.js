@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
 process.on('unhandledRejection', err => {
-  throw err;
-});
+  throw err
+})
 
-const jest = require('jest');
-let argv = process.argv.slice(2);
+const jest = require('jest')
+const argv = process.argv.slice(2)
 
 // Watch unless on CI, in coverage mode, or explicitly running all tests
 if (
@@ -13,8 +13,8 @@ if (
   argv.indexOf('--coverage') === -1 &&
   argv.indexOf('--watchAll') === -1
 ) {
-  argv.push('--watch');
+  argv.push('--watch')
 }
 
 
-jest.run(argv);
+jest.run(argv)

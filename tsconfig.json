@@ -1,17 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es5",
     "lib": [
       "esnext",
       "dom"
     ],
     "sourceMap": false,
-    "allowJs": true,
-    "moduleResolution": "Node",
     "rootDir": "./src",
-    "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": false,
@@ -21,9 +18,14 @@
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "downlevelIteration": true,
-    "declarationMap": false,
-    "declaration": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
   },
   "exclude": [
     "node_modules",
@@ -33,10 +35,10 @@
     "webpack",
     "jest",
     "config",
-    "src/__tests__",
-    "dist",
-    "src/docs",
-    "src/docUtils",
-    "src/utils"
+    "./jest.config.js",
+    "./babel.config.js",
+    "coverage",
+    "ani-query",
+    "ani-query-cache"
   ]
 }

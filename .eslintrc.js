@@ -6,19 +6,14 @@ module.exports = {
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true,
-        },
         "ecmaVersion": 12,
         "sourceType": "module",
     },
     "plugins": [
-        "react",
         "@typescript-eslint",
     ],
     "rules": {
@@ -26,23 +21,15 @@ module.exports = {
         "no-explicit-any": 0,
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/no-namespace": 0,
-        "@typescript-eslint/ban-types": [1, {
-            "types": {
-                "Function": false,
-            },
-        }],
         "no-case-declarations": 0,
         "@typescript-eslint/explicit-module-boundary-types": 0,
         "no-var": 0,
         "@typescript-eslint/adjacent-overload-signatures": 0,
         "@typescript-eslint/ban-ts-comment": 0,
         "@typescript-eslint/no-var-requires": 0,
-        "react/prop-types": 0,
         "@typescript-eslint/no-empty-interface": 0,
         "no-prototype-builtins": 0,
-        "react/react-in-jsx-scope": 0,
         "no-empty-pattern": 0,
-        "react/no-unescaped-entities": 0,
         "@typescript-eslint/no-non-null-assertion": 0,
         "no-async-promise-executor": 0,
         "@typescript-eslint/no-unused-vars": [1, {
@@ -51,7 +38,7 @@ module.exports = {
         }],
         "no-debugger": 1,
         "@typescript-eslint/semi": ['warn', 'never'],
-        "@typescript-eslint/comma-dangle": ["warn", "always-multiline"],
+        "@typescript-eslint/explicit-function-return-type": 0,
     },
     globals: {
         "window": true,

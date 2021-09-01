@@ -24,8 +24,8 @@ describe('makeTable', () => {
         }
         const table = makeTable({
             columns: [
-                { render: (el: item) => el['first name'], name: 'first name' },
-                { render: (el: item) => el['last name'], name: 'last name' }
+                { render: (el: item) => el['first name'], name: 'First Name' },
+                { render: (el: item) => el['last name'], name: 'Last Name' }
             ]
         })
         const data = [
@@ -38,7 +38,7 @@ describe('makeTable', () => {
                 'last name': 'Kim'
             }
         ]
-        let expected = '| first name | last name |'
+        let expected = '| First Name | Last Name |'
         expected += '\n| -- | -- |'
         expected += '\n| Andrew | Yueh |'
         expected += '\n| Charlie | Kim |'

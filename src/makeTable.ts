@@ -1,13 +1,29 @@
 type options<T> = {
-    columns: ((arg: T) => string)[];
+    columns: {
+        render: ((data: T) => string);
+        name: string;
+    }[];
 }
 
 const makeTable = <T>(options: options<T>) => (data: T[]) => {
     const { columns } = options
-    return data.map((value, idx) => {
-        const parser = columns[idx]
-        return parser(value)
-    }).join('|')
+    return '| '
+        .concat(columns.map(({ name }) => name).join(' | '))
+        .concat(' |')
+        .concat('\n')
+        .concat('| ')
+        .concat(columns.map(() => '--').join(' | '))
+        .concat(' |')
+
+        .concat(data.map((datumPojo) => {
+            return ''
+                .concat('\n')
+                .concat('| ')
+                .concat(columns.map(({ render }) => {
+                    return render(datumPojo)
+                }).join(' | '))
+                .concat(' |')
+        }).join(''))
 }
 
 export default makeTable

@@ -15,12 +15,12 @@ const makeTable = <T>(options: options<T>) => (data: T[]) => {
         .concat(columns.map(() => '--').join(' | '))
         .concat(' |')
 
-        .concat(data.map((datumPojo) => {
+        .concat(data.map((datum) => {
             return ''
                 .concat('\n')
                 .concat('| ')
                 .concat(columns.map(({ render }) => {
-                    return render(datumPojo)
+                    return render(datum)
                 }).join(' | '))
                 .concat(' |')
         }).join(''))

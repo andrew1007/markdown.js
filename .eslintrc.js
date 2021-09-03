@@ -33,13 +33,13 @@ module.exports = {
         "no-empty-pattern": 0,
         "@typescript-eslint/no-non-null-assertion": 0,
         "no-async-promise-executor": 0,
+        "no-debugger": 1,
+        "@typescript-eslint/semi": ['warn', 'never'],
+        "@typescript-eslint/explicit-function-return-type": 0,
         "@typescript-eslint/no-unused-vars": [1, {
             "ignoreRestSiblings": true,
             "argsIgnorePattern": "^_",
         }],
-        "no-debugger": 1,
-        "@typescript-eslint/semi": ['warn', 'never'],
-        "@typescript-eslint/explicit-function-return-type": 0,
     },
     globals: {
         "window": true,

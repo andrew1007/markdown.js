@@ -6,10 +6,10 @@ import Markdown from "../Markdown"
 const md = new Markdown()
 const title = makeHeader({
     type: '#'
-})((_, str: string) => str)
+})((str: string) => str)
 const h1 = makeHeader({
     type: '##'
-})((_, str: string) => str)
+})((str: string) => str)
 md.add(title('Markdown.js'))
     .add(h1('Markdown powered by JavaScript'))
 

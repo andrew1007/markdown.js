@@ -1,12 +1,12 @@
 type options = {
     type: '#' | '##' | '####' | '#####';
 }
-const makeHeader = (options: options) => <T>(cb: (increment: number, arg: T) => string) => {
+const makeHeader = (options: options) => <T>(cb: (arg: T, increment: number) => string) => {
     const { type } = options
     let inc = 0
     return (arg: T) => {
         inc++
-        return `${type} ${cb(inc, arg)}`
+        return `${type} ${cb(arg, inc)}`
     }
 }
 

@@ -5,14 +5,14 @@ describe('makeHeader', () => {
         expect(() => makeHeader).not.toThrow()
     })
     it('creates basic header', () => {
-        const h1 = makeHeader({ type: '#' })((_, str: string) => str)
+        const h1 = makeHeader({ type: '#' })((str: string) => str)
         expect(h1('hello')).toEqual('# hello')
     })
     it('creates complex header', () => {
         const config = {
             type: '#' as const,
         }
-        const h1 = makeHeader(config)((_, str: string) => {
+        const h1 = makeHeader(config)((str: string) => {
             return `[h1] ${str}`
         })
         expect(h1('hello')).toEqual('# [h1] hello')
@@ -21,7 +21,7 @@ describe('makeHeader', () => {
         const config = {
             type: '#' as const,
         }
-        const h1 = makeHeader(config)((inc, str: string) => {
+        const h1 = makeHeader(config)((str: string, inc) => {
             return `[1.${inc}] ${str}`
         })
         h1('Introduction')
@@ -35,7 +35,7 @@ describe('makeHeader', () => {
             topic: string;
             description: string;
         }
-        const h1 = makeHeader(config)((inc, args: complexArg) => {
+        const h1 = makeHeader(config)((args: complexArg, inc) => {
             const { description, topic } = args
             return `[1.${inc}] ${topic}: ${description}`
         })

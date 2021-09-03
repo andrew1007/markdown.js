@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "module": "esnext",
+    "module": "commonjs",
     "target": "es5",
     "lib": [
       "esnext",
@@ -26,7 +26,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "downlevelIteration": true,
-    "jsx": "react"
+    "jsx": "react",
+    "removeComments": false
   },
   "exclude": [
     "node_modules",

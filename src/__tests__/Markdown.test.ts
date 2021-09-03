@@ -1,3 +1,4 @@
+import makeCodeBlock from "../makeCodeBlock"
 import makeHeader from "../makeHeader"
 import makeTable from "../makeTable"
 import makeTableOfContents from "../makeTableOfContents"
@@ -26,6 +27,20 @@ const table = makeTable({
 
 md.add(table)
 
+const { start, end, get } = makeCodeBlock({
+    spaces: 0,
+    language: 'bash'
+})
+start()
+const markdown = new Markdown()
+const append = () => {
+    markdown.add(title('Code Blocks'))
+}
+append()
+end()
+
+md.add(get())
+
 describe('Markdown', () => {
     it('does not throw', () => {
         expect(() => Markdown).not.toThrow()
@@ -37,6 +52,13 @@ describe('Markdown', () => {
         expected += '\n\n| Name |'
         expected += '\n| -- |'
         expected += '\n| Andrew |'
+        expected += '\n\n```bash'
+        expected += '\nconst markdown = new Markdown()'
+        expected += `\nconst append = () => {`
+        expected += `\n    markdown.add(title('Code Blocks'))`
+        expected += `\n}`
+        expected += `\nappend()`
+        expected += '\n```'
         expect(md.text).toEqual(expected)
     })
 })

@@ -40,6 +40,7 @@ module.exports = {
             "ignoreRestSiblings": true,
             "argsIgnorePattern": "^_",
         }],
+        "@typescript-eslint/ban-ts-ignore": 0,
     },
     globals: {
         "window": true,

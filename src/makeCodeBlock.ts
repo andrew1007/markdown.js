@@ -1,23 +1,23 @@
 import fs from 'fs'
+import path from 'path'
 
 type options = {
     spaces: number;
+    language: string;
+    fileImport?: string;
 }
 const makeCodeBlock = (options: options) => {
-    const { spaces } = options
+    const { spaces, language, fileImport } = options
     let positionStart: number
     let positionEnd: number
-    const baseIndentation = 0
 
-    const err = new Error();
+    const err = new Error()
+    Error.prepareStackTrace = (_, stack) => stack
+    const stack = err.stack
+    Error.prepareStackTrace = undefined
 
-    Error.prepareStackTrace = (_, stack) => stack;
-
-    const stack = err.stack;
-
-    Error.prepareStackTrace = undefined;
-
-    const absolutePath = stack[1].getFileName();
+    // @ts-ignore
+    const absolutePath = stack[1].getFileName()
     return {
         start: () => {
             var e = new Error()
@@ -27,16 +27,19 @@ const makeCodeBlock = (options: options) => {
                 throw e
             } catch (e) {
                 if (!e.stack) {
-                    return 0 // IE < 10, likely
+                    positionStart = 0 // IE < 10, likely
                 }
             }
+            // @ts-ignore
             var stack = e.stack.toString().split(/\r\n|\n/)
             // We want our caller's frame. It's index into |stack| depends on the
             // browser and browser version, so we need to search for the second frame:
             var frameRE = /:(\d+):(?:\d+)[^\d]*$/
             do {
                 var frame = stack.shift()
+                // @ts-ignore
             } while (!frameRE.exec(frame) && stack.length)
+            // @ts-ignore
             positionStart = Number(frameRE.exec(stack.shift())[1])
         },
         end: () => {
@@ -47,26 +50,37 @@ const makeCodeBlock = (options: options) => {
                 throw e
             } catch (e) {
                 if (!e.stack) {
-                    return 0 // IE < 10, likely
+                    positionEnd = 0 // IE < 10, likely
                 }
             }
+            // @ts-ignore
             var stack = e.stack.toString().split(/\r\n|\n/)
             // We want our caller's frame. It's index into |stack| depends on the
             // browser and browser version, so we need to search for the second frame:
             var frameRE = /:(\d+):(?:\d+)[^\d]*$/
             do {
                 var frame = stack.shift()
+                // @ts-ignore
             } while (!frameRE.exec(frame) && stack.length)
+            // @ts-ignore
             positionEnd = Number(frameRE.exec(stack.shift())[1]) - 1
         },
-        importCode: () => { },
         get: () => {
+            if (fileImport) {
+                console.log(absolutePath, fileImport)
+                return `\`\`\`${language}\n` +
+                    fs.readFileSync(path.join(absolutePath.split('/').slice(0, -1).join('/'), fileImport), { encoding: "utf8" })
+                    + '\n```'
+            }
             const newFile = fs.readFileSync(absolutePath, { encoding: "utf8" })
-            return newFile
-                .split('\n')
-                .slice(positionStart, positionEnd)
-                .map(line => line.slice(spaces))
-                .join('\n')
+            return `\`\`\`${language}\n` +
+                newFile
+                    .split('\n')
+                    .slice(positionStart, positionEnd)
+                    .map(line => line.slice(spaces))
+                    .join('\n')
+                    .concat('\n')
+                + '```'
         },
     }
 }

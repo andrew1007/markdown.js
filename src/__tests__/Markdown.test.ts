@@ -33,6 +33,7 @@ const { start, end, get } = makeCodeBlock({
 })
 start()
 const markdown = new Markdown()
+
 const append = () => {
     markdown.add(title('Code Blocks'))
 }
@@ -54,6 +55,7 @@ describe('Markdown', () => {
         expected += '\n| Andrew |'
         expected += '\n\n```bash'
         expected += '\nconst markdown = new Markdown()'
+        expected += '\n'
         expected += `\nconst append = () => {`
         expected += `\n    markdown.add(title('Code Blocks'))`
         expected += `\n}`

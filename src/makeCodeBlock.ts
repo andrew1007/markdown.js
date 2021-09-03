@@ -67,7 +67,6 @@ const makeCodeBlock = (options: options) => {
         },
         get: () => {
             if (fileImport) {
-                console.log(absolutePath, fileImport)
                 return `\`\`\`${language}\n` +
                     fs.readFileSync(path.join(absolutePath.split('/').slice(0, -1).join('/'), fileImport), { encoding: "utf8" })
                     + '\n```'
